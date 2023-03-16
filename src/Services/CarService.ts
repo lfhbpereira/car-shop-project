@@ -31,4 +31,14 @@ export default class CarService implements ICarService {
 
     return new Car(car);
   }
+
+  public async update(id: string, car: ICar): Promise<Car | null> {
+    const updatedCar = await this._carModel.update(id, car);
+
+    if (!updatedCar) {
+      throw new HttpException(404, 'Car not found');
+    }
+
+    return new Car(updatedCar);
+  }
 }
