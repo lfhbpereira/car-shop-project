@@ -1,4 +1,4 @@
-import { isValidObjectId, Model, model, models, Schema } from 'mongoose';
+import { isValidObjectId, Model, model, models, Schema, UpdateQuery } from 'mongoose';
 
 import HttpException from '../utils/HttpException';
 
@@ -31,5 +31,11 @@ export default abstract class AbstractODM<T> {
     this._validateId(id);
 
     return this.model.findById(id);
+  }
+
+  public async update(id: string, obj: T): Promise<T | null> {
+    this._validateId(id);
+
+    return this.model.findOneAndUpdate({ _id: id }, obj as UpdateQuery<T>, { new: true });
   }
 }
