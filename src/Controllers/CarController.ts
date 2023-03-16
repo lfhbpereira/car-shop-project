@@ -17,5 +17,16 @@ export default class CarController {
     } catch (error) {
       next(error);
     }
-  };  
+  };
+
+  public getAll = async (_req: Request, res: Response, next: NextFunction)
+  : Promise<Response | void> => {
+    try {
+      const cars = await this._carService.getAll();
+
+      return res.status(200).json(cars);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
