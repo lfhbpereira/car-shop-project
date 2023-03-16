@@ -13,5 +13,11 @@ export default class CarService implements ICarService {
     );
 
     return new Car(newCar);
-  }  
+  }
+
+  public async getAll(): Promise<Car[]> {
+    const cars = await this._carModel.getAll();
+
+    return cars.map((car) => new Car(car));
+  }
 }
