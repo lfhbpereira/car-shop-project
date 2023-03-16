@@ -9,7 +9,7 @@ export default class CarService implements ICarService {
   public async create(car: ICar): Promise<Car> {
     const { model, year, color, status, buyValue, doorsQty, seatsQty } = car;
     const newCar = await this._carModel.create(
-      { model, year, color, status, buyValue, doorsQty, seatsQty },
+      { model, year, color, status: status || false, buyValue, doorsQty, seatsQty },
     );
 
     return new Car(newCar);
