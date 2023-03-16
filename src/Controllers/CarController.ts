@@ -29,4 +29,17 @@ export default class CarController {
       next(error);
     }
   };
+
+  public getById = async (req: Request, res: Response, next: NextFunction)
+  : Promise<Response | void> => {
+    const { id } = req.params;
+
+    try {
+      const car = await this._carService.getById(id);
+
+      return res.status(200).json(car);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
