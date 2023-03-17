@@ -29,4 +29,17 @@ export default class MotorcycleController {
       next(error);
     }
   };
+
+  public getById = async (req: Request, res: Response, next: NextFunction)
+  : Promise<Response | void> => {
+    const { id } = req.params;
+
+    try {
+      const motorcycle = await this._motorcycleService.getById(id);
+
+      return res.status(200).json(motorcycle);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
