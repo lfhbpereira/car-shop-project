@@ -31,4 +31,14 @@ export default class MotorcycleService implements IMotorcycleService {
 
     return new Motorcycle(motorcycle);
   }
+
+  public async update(id: string, motorcycle: IMotorcycle): Promise<Motorcycle | null> {
+    const updatedMotorcycle = await this._motorcycleModel.update(id, motorcycle);
+
+    if (!updatedMotorcycle) {
+      throw new HttpException(404, 'Motorcycle not found');
+    }
+
+    return new Motorcycle(updatedMotorcycle);
+  }
 }
