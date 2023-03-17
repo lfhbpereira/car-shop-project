@@ -15,4 +15,6 @@ motorcycleRouter.post('/', motorcycleController.create);
 motorcycleRouter.get('/', motorcycleController.getAll);
 motorcycleRouter.get('/:id', motorcycleController.getById);
 
+motorcycleRouter.put('/:id', motorcycleController.update);
+
 export default motorcycleRouter;
