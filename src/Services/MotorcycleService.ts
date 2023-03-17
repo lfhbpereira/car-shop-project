@@ -1,4 +1,5 @@
 import AbstractODM from '../Models/AbstractODM';
+import HttpException from '../utils/HttpException';
 import IMotorcycle from '../Interfaces/IMotorcycle';
 import IMotorcycleService from './interfaces/IMotorcycleService';
 import Motorcycle from '../Domains/Motorcycle';
@@ -19,5 +20,15 @@ export default class MotorcycleService implements IMotorcycleService {
     const motorcycles = await this._motorcycleModel.getAll();
 
     return motorcycles.map((motorcycle) => new Motorcycle(motorcycle));
+  }
+
+  public async getById(id: string): Promise<Motorcycle | null> {
+    const motorcycle = await this._motorcycleModel.getById(id);
+
+    if (!motorcycle) {
+      throw new HttpException(404, 'Motorcycle not found');
+    }
+
+    return new Motorcycle(motorcycle);
   }
 }
