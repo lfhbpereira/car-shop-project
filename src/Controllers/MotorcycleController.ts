@@ -18,4 +18,15 @@ export default class MotorcycleController {
       next(error);
     }
   };
+
+  public getAll = async (_req: Request, res: Response, next: NextFunction)
+  : Promise<Response | void> => {
+    try {
+      const motorcycles = await this._motorcycleService.getAll();
+
+      return res.status(200).json(motorcycles);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
