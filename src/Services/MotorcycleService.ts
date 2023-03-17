@@ -14,4 +14,10 @@ export default class MotorcycleService implements IMotorcycleService {
 
     return new Motorcycle(newMotorcycle);
   }
+
+  public async getAll(): Promise<Motorcycle[]> {
+    const motorcycles = await this._motorcycleModel.getAll();
+
+    return motorcycles.map((motorcycle) => new Motorcycle(motorcycle));
+  }
 }
